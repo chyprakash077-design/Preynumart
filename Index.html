@@ -1,0 +1,263 @@
+# Preynumart
+Online shopping // app/page.tsx
+
+import Link from "next/link";
+
+const categories = [
+  { name: "Electronics", icon: "📱" },
+  { name: "Fashion", icon: "👕" },
+  { name: "Home & Living", icon: "🏠" },
+  { name: "Beauty", icon: "💄" },
+  { name: "Grocery", icon: "🛒" },
+  { name: "Pet Products", icon: "🐶" },
+  { name: "Sports", icon: "⚽" },
+  { name: "Accessories", icon: "⌚" },
+];
+
+const products = [
+  {
+    id: 1,
+    name: "Wireless Headphones",
+    price: 2499,
+    oldPrice: 2999,
+    image: "/images/headphones.jpg",
+  },
+  {
+    id: 2,
+    name: "Premium Smart Watch",
+    price: 3499,
+    oldPrice: 4499,
+    image: "/images/smartwatch.jpg",
+  },
+  {
+    id: 3,
+    name: "Casual T-Shirt",
+    price: 899,
+    oldPrice: 1199,
+    image: "/images/tshirt.jpg",
+  },
+  {
+    id: 4,
+    name: "Modern Backpack",
+    price: 1599,
+    oldPrice: 1999,
+    image: "/images/backpack.jpg",
+  },
+];
+
+export default function Home() {
+  return (
+    <main className="min-h-screen bg-gray-50">
+
+      {/* Navbar */}
+      <header className="bg-white border-b sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+
+          <Link href="/" className="text-2xl font-bold">
+            Preynumart
+          </Link>
+
+          <div className="hidden md:flex flex-1 max-w-xl mx-8">
+            <input
+              type="text"
+              placeholder="Search products..."
+              className="w-full border rounded-l-lg px-4 py-3 outline-none"
+            />
+            <button className="bg-black text-white px-6 rounded-r-lg">
+              Search
+            </button>
+          </div>
+
+          <div className="flex items-center gap-5">
+            <Link href="/login">👤</Link>
+            <Link href="/wishlist">❤️</Link>
+            <Link href="/cart">🛒</Link>
+          </div>
+
+        </div>
+      </header>
+
+      {/* Hero */}
+      <section className="bg-black text-white">
+        <div className="max-w-7xl mx-auto px-4 py-20">
+          <div className="max-w-2xl">
+            <p className="text-yellow-400 font-semibold mb-3">
+              NEPAL'S ONLINE SHOPPING STORE
+            </p>
+
+            <h1 className="text-4xl md:text-6xl font-bold leading-tight">
+              Everything You Need.
+              <br />
+              All in One Place.
+            </h1>
+
+            <p className="mt-6 text-gray-300 text-lg">
+              Shop electronics, fashion, home products, beauty,
+              groceries and more at Preynumart.
+            </p>
+
+            <Link
+              href="/products"
+              className="inline-block mt-8 bg-white text-black px-8 py-4 rounded-lg font-semibold"
+            >
+              Shop Now →
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Categories */}
+      <section className="max-w-7xl mx-auto px-4 py-12">
+
+        <div className="flex justify-between items-center mb-8">
+          <h2 className="text-2xl font-bold">
+            Shop by Category
+          </h2>
+
+          <Link href="/categories" className="text-sm">
+            View All →
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4">
+          {categories.map((category) => (
+            <Link
+              href={`/category/${category.name
+                .toLowerCase()
+                .replaceAll(" ", "-")}`}
+              key={category.name}
+              className="bg-white border rounded-xl p-5 text-center hover:shadow-md transition"
+            >
+              <div className="text-4xl mb-3">
+                {category.icon}
+              </div>
+
+              <p className="font-medium text-sm">
+                {category.name}
+              </p>
+            </Link>
+          ))}
+        </div>
+
+      </section>
+
+      {/* Products */}
+      <section className="max-w-7xl mx-auto px-4 pb-16">
+
+        <div className="flex justify-between items-center mb-8">
+          <h2 className="text-2xl font-bold">
+            Popular Products
+          </h2>
+
+          <Link href="/products" className="text-sm">
+            View All →
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
+
+          {products.map((product) => (
+            <Link
+              href={`/product/${product.id}`}
+              key={product.id}
+              className="bg-white rounded-xl overflow-hidden border hover:shadow-lg transition"
+            >
+
+              <div className="aspect-square bg-gray-100">
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+
+              <div className="p-4">
+
+                <h3 className="font-semibold">
+                  {product.name}
+                </h3>
+
+                <div className="mt-3">
+                  <span className="font-bold text-lg">
+                    Rs. {product.price.toLocaleString()}
+                  </span>
+
+                  <span className="ml-2 text-gray-400 line-through text-sm">
+                    Rs. {product.oldPrice.toLocaleString()}
+                  </span>
+                </div>
+
+                <button className="w-full mt-4 bg-black text-white py-2 rounded-lg">
+                  Add to Cart
+                </button>
+
+              </div>
+
+            </Link>
+          ))}
+
+        </div>
+
+      </section>
+
+      {/* Trust Section */}
+      <section className="bg-white border-t">
+        <div className="max-w-7xl mx-auto px-4 py-10 grid md:grid-cols-4 gap-8 text-center">
+
+          <div>
+            <div className="text-3xl">🚚</div>
+            <h3 className="font-bold mt-2">Fast Delivery</h3>
+            <p className="text-sm text-gray-500">
+              Delivery across Nepal
+            </p>
+          </div>
+
+          <div>
+            <div className="text-3xl">💵</div>
+            <h3 className="font-bold mt-2">Cash on Delivery</h3>
+            <p className="text-sm text-gray-500">
+              Pay when you receive
+            </p>
+          </div>
+
+          <div>
+            <div className="text-3xl">🔒</div>
+            <h3 className="font-bold mt-2">Secure Shopping</h3>
+            <p className="text-sm text-gray-500">
+              Safe and reliable checkout
+            </p>
+          </div>
+
+          <div>
+            <div className="text-3xl">↩️</div>
+            <h3 className="font-bold mt-2">Easy Returns</h3>
+            <p className="text-sm text-gray-500">
+              Simple return process
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-black text-white">
+        <div className="max-w-7xl mx-auto px-4 py-10">
+
+          <h2 className="text-2xl font-bold">
+            Preynumart
+          </h2>
+
+          <p className="text-gray-400 mt-2">
+            Your trusted online shopping destination in Nepal.
+          </p>
+
+          <div className="border-t border-gray-800 mt-8 pt-6 text-sm text-gray-500">
+            © 2026 Preynumart. All rights reserved.
+          </div>
+
+        </div>
+      </footer>
+
+    </main>
+  );
+}
